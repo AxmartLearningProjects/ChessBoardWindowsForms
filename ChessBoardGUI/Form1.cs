@@ -53,7 +53,7 @@ namespace ChessBoardGUI
                     panel1.Controls.Add(btnGrid[i, j]);
                     btnGrid[i, j].Location = new Point(i * buttonSize, j * buttonSize);
 
-                    btnGrid[i, j].Text = i + " | " + j;
+                    //btnGrid[i, j].Text = i + " | " + j;
                     btnGrid[i, j].Tag = new Point(i, j);
 
 
@@ -79,7 +79,7 @@ namespace ChessBoardGUI
 
             // determine legal next moves
 
-            myBoard.MarkNextLegalMoves(currentCell, "knight");
+            myBoard.MarkNextLegalMoves(currentCell, comboBox1.Text.ToLower());
 
 
             //update the text on each button
@@ -95,7 +95,7 @@ namespace ChessBoardGUI
                     }
                     else if (myBoard.TheGrid[i,j].CurrentlyOccupied)
                     {
-                        btnGrid[i, j].Text = "Knight";
+                        btnGrid[i, j].Text = comboBox1.Text;
                     }
 
                 }
