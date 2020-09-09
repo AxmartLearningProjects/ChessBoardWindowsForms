@@ -54,6 +54,7 @@ namespace ChessBoardGUI
                     btnGrid[i, j].Location = new Point(i * buttonSize, j * buttonSize);
 
                     btnGrid[i, j].Text = i + " | " + j;
+                    btnGrid[i, j].Tag = new Point(i, j);
 
 
                 }
@@ -66,7 +67,41 @@ namespace ChessBoardGUI
 
         private void Grid_Button_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("you clicked a button");
+
+            // get the row and the col number for the button
+            Button clickedButton = (Button)sender;
+            Point location = (Point)clickedButton.Tag;
+
+            //int x = location.X;
+            //int y = location.Y;
+
+            Cell currentCell = myBoard.TheGrid[location.X, location.Y];
+
+            // determine legal next moves
+
+            myBoard.MarkNextLegalMoves(currentCell, "knight");
+
+
+            //update the text on each button
+            for (int i = 0; i < myBoard.Size; i++)
+            {
+                for (int j = 0; j < myBoard.Size; j++)
+                {
+                    btnGrid[i, j].Text = string.Empty;
+
+                    if (myBoard.TheGrid[i,j].LegalNextMove)
+                    {
+                        btnGrid[i, j].Text = "Legal";
+                    }
+                    else if (myBoard.TheGrid[i,j].CurrentlyOccupied)
+                    {
+                        btnGrid[i, j].Text = "Knight";
+                    }
+
+                }
+            }
+
+
         }
     }
 }
